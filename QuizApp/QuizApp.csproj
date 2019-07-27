@@ -20,9 +20,4 @@
     <ProjectReference Include="..\QuizApp.Infrastructure\QuizApp.Infrastructure.csproj" />
   </ItemGroup>
   
-  <ItemGroup>
-    <None Update="quizapp.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

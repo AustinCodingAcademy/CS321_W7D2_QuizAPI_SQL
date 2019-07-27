@@ -49,7 +49,11 @@ namespace QuizApp.Controllers
             }
             catch (System.Exception ex)
             {
-                ModelState.AddModelError("AddQuestion", ex.Message);
+                var x = ex;
+                while (x != null) {
+                    ModelState.AddModelError("AddQuestion", x.Message);
+                    x = x.InnerException;
+                }
                 return BadRequest(ModelState);
             }
         }
