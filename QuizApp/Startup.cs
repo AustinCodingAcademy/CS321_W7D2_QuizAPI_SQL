@@ -31,7 +31,15 @@ namespace QuizApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<AppDbContext>();
+            
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("QuizDbConnection")));
+            else
+            {
+                services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("QuizDbConnection")));
+            }
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
